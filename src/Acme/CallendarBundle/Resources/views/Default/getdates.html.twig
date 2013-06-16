@@ -1,0 +1,115 @@
+{% extends 'AcmeCallendarBundle:Default:home.html.twig' %}
+
+
+{% block additional_style %}
+#table-3 {
+	border: 1px solid #DFDFDF;
+	background-color: #F9F9F9;
+	width: 100%;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	font-family: Arial,"Bitstream Vera Sans",Helvetica,Verdana,sans-serif;
+	color: #333;
+}
+#table-3 td, #table-3 th {
+	border-top-color: white;
+	border-bottom: 1px solid #DFDFDF;
+	color: #555;
+}
+#table-3 th {
+	text-shadow: rgba(255, 255, 255, 0.796875) 0px 1px 0px;
+	font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+	font-weight: normal;
+	padding: 7px 7px 8px;
+	text-align: left;
+	line-height: 1.3em;
+	font-size: 14px;
+}
+#table-3 td {
+	font-size: 12px;
+	padding: 4px 7px 2px;
+	vertical-align: top;
+	width: 35px;
+	height: 35px;
+}
+
+{% endblock %}	
+
+{% block adminlinks %}
+      <li class="home"><a href="{{ asset('app_dev.php/user/new')}}">New Event</a></li>
+{% endblock %}
+
+{% block post %}
+<div class="single_post">
+	<article>
+		<div class="art">				
+			<header class="post_head">
+				<h2>Dates:</h2>					
+			</header>
+				<table id="table-3">
+				 <tbody>
+				{% for date in dates %}
+					<tr><td>
+						{{ date.getDate()}}</td>										
+						<td>{{ date.getNiceEvent()}}</td>			
+						  <td><li><a href="{{ asset('app_dev.php/user/del/')}}{{date.getDate()}}">delete</a></li></td>
+					</tr>				
+			      {% else %}
+				    <li>No Events</li>
+				{% endfor %}
+				</tbody>
+				</table> 	
+			</div>						
+		</article>
+	</div>
+
+	
+
+<div class="single_post">
+	<article>
+		<div class="art">				
+			<header class="post_head">
+				<h2>Monthyly Events</h2>					
+			</header>
+				<table id="table-3">
+				 <tbody>
+				 <tr>
+				{% for i in 1..35 %}
+				
+					<td>
+					{%if (i-start)>0 and (i-start)<=stop %} 
+					      {{i-start}}
+					 {% endif %}
+					 <br>
+					 {% for date in dates %}
+					      {%if (i-start)==date.getDate() %}
+						    {% for exploded in date.getExploded() %}
+							{{exploded}}<br>
+						    {% endfor %}
+					      {% endif %}
+					 {% endfor %}
+					</td>
+					
+					{% if i%7 == 0 %}
+					  </tr><tr>
+					{% endif %}
+					
+								
+				{% endfor %}
+				</tr>	
+				</tbody>
+				</table> 	
+			</div>						
+		</article>
+	</div>
+
+{% endblock %}
+
+{% block title %}
+	LoginPage
+{% endblock %}
+
+{% block title_inside%}
+	<h3>LoginPage</h3>
+{% endblock %}

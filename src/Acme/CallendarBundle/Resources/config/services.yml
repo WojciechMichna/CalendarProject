@@ -1,0 +1,7 @@
+parameters:
+#    acme_callendar.example.class: Acme\CallendarBundle\Example
+
+services:
+#    acme_callendar.example:
+#        class: %acme_callendar.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

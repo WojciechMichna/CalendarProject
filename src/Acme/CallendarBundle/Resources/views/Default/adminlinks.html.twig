@@ -1,0 +1,6 @@
+{% extends 'AcmeCallendarBundle:Default:home.html.twig' %}
+
+{% block adminlinks %}
+						<li class="home"><a href="{{ asset('app_dev.php/admin/user_new/')}}">AddUser</a></li>
+						<li class="home"><a href="{{ asset('app_dev.php/admin/user_get/')}}">Users</a></li>
+{% endblock %}

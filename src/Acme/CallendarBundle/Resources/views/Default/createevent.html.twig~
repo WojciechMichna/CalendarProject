@@ -1,0 +1,33 @@
+{% extends 'AcmeCallendarBundle:Default:home.html.twig' %}
+
+
+{% block adminlinks %}
+      <li class="home"><a href="{{ asset('app_dev.php/user/new')}}">New Event</a></li>
+{% endblock %}
+
+
+{% block post %}
+<div class="single_post">
+	<article>
+		<div class="art">				
+			<header class="post_head">
+				<h2>AddEvent</h2>					
+			</header>
+				<form action="{{ path('event_new') }}" method="post" {{ form_enctype(form) }}>
+				    {{ form_widget(form) }}
+				    <input type="submit" />
+				</form>
+			</div>						
+		</article>
+	</div>
+
+{% endblock %}
+
+{% block title %}
+	LoginPage
+{% endblock %}
+
+{% block title_inside%}
+	<h3>LoginPage</h3>
+{% endblock %}
+

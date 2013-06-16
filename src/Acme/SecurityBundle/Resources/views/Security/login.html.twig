@@ -1,0 +1,42 @@
+{% extends 'AcmeCallendarBundle:Default:home.html.twig' %}
+{% block post %}
+
+
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+
+<div class="single_post">
+	<article>
+		<div class="art">				
+			<header class="post_head">
+				<h2>Login</h2>					
+			</header>
+				<form action="{{ path('login_check') }}" method="post">
+				<p>
+				    <label for="username">Username:</label>
+				    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+				</p><p>	
+				    <label for="password">Password:</label>
+				    <input type="password" id="password" name="_password" />
+				
+				    {#
+					If you want to control the URL the user is redirected to on success (more details below)
+					<input type="hidden" name="_target_path" value="/account" />
+				    #}
+				</p>
+				    <button type="submit">login</button>
+				</form>
+			</div>						
+		</article>
+	</div>
+
+{% endblock %}
+
+{% block title %}
+	LoginPage
+{% endblock %}
+
+{% block title_inside%}
+	<h3>LoginPage</h3>
+{% endblock %}

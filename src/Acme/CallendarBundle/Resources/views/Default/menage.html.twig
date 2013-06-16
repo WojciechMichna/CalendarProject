@@ -1,0 +1,27 @@
+{% extends 'AcmeCallendarBundle:Default:adminlinks.html.twig' %}
+
+{% block post %}
+<div class="single_post">
+	<article>
+		<div class="art">				
+			<header class="post_head">
+				<h2>AddUser</h2>					
+			</header>
+				<form action="{{ path('user_new') }}" method="post" {{ form_enctype(form) }}>
+				    {{ form_widget(form) }}
+				    <input type="submit" />
+				</form>
+			</div>						
+		</article>
+	</div>
+
+{% endblock %}
+
+{% block title %}
+	LoginPage
+{% endblock %}
+
+{% block title_inside%}
+	<h3>LoginPage</h3>
+{% endblock %}
+

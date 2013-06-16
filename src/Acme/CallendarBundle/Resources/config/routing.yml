@@ -1,0 +1,41 @@
+callendar_homepage:
+    pattern:  /hello/user/
+    defaults: { _controller: AcmeCallendarBundle:Callendar:home }
+
+user_new:
+    pattern:  /admin/user_new/
+    defaults: { _controller: AcmeCallendarBundle:Callendar:adduser }
+
+user_get:
+    pattern:  /admin/user_get/
+    defaults: { _controller: AcmeCallendarBundle:Callendar:getuser }
+
+user_del:
+    pattern:  /admin/del/{Id}
+    defaults: { _controller: AcmeCallendarBundle:Callendar:userdel }
+
+get_dates:
+    pattern:  /user/
+    defaults: { _controller: AcmeCallendarBundle:Callendar:Dates }
+    
+admin_home:
+    pattern:  /admin/
+    defaults: { _controller: AcmeCallendarBundle:Callendar:getuser }
+
+    
+event_new:
+    pattern:  /user/new
+    defaults: { _controller: AcmeCallendarBundle:Callendar:NewEvent }
+
+delete_event:
+    pattern:  /user/del/{date}
+    defaults: { _controller: AcmeCallendarBundle:Callendar:DelEvent }    
+    
+api:
+    pattern:  /api/home/{name}/{password}/{event}
+    defaults: { _controller: AcmeCallendarBundle:Callendar:api }
+    
+       
+libapi:
+    pattern:  /libapi/home/{bs_username}
+    defaults: { _controller: AcmeCallendarBundle:Callendar:libapi , bs_username = 0 }

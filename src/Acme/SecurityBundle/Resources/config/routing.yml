@@ -1,0 +1,31 @@
+acme_security_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AcmeSecurityBundle:Default:index }
+
+
+admin:
+    pattern:  /hello/admin/{name}
+    defaults: { _controller: AcmeSecurityBundle:Default:index }
+
+login_with_wild_card:
+    pattern:   /login/{wild}
+    defaults:  { _controller: AcmeSecurityBundle:Security:login }
+    requirements:
+       wild: ".+"
+
+       
+login:
+    pattern:   /login
+    defaults:  { _controller: AcmeSecurityBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+    defaults:  { _controller: AcmeSecurityBundle:Security:login }
+
+check:
+    pattern:   /check
+    defaults:  { _controller: AcmeSecurityBundle:Security:Check }
+
+logout:
+    path:   /logout
+    defaults: { _controller: AcmeSecurityBundle:Default:logout }

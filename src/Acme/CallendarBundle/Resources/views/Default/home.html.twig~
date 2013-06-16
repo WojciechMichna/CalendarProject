@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title> {% block title %}{% endblock %}</title>
+	<link href="{{ asset('bundles/callendar/css/style.css')}}" rel="stylesheet" type="text/css" media="screen" />
+
+	<style type="text/css">
+		body {
+			background: #f6f6ee url({{ asset('bundles/callendar/images/bck.jpg')}});
+		}	
+		header#site_head {
+			background: url({{ asset('bundles/callendar/images/bck_head.jpg')}});
+		}
+		.section_tit h3 {
+			background: url({{ asset('bundles/callendar/images/line.png')}}) no-repeat center center; 
+		}
+	{% block additional_style %}
+	{% endblock %}	
+	</style>
+
+</head>
+<body>
+
+		
+		<header id="site_head">
+			<div class="header_cont">
+				<nav class="head_nav">
+					<ul>
+						{% block adminlinks %}{% endblock %}
+						<li class="home"><a href="{{ asset('app_dev.php/user')}}">Home</a></li>
+						<li class="home"><a href="{{ asset('app_dev.php/logout')}}">Logout</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+
+	<div id="main_content">
+		<section id="last_posts">
+			<header class="section_tit">
+				{% block title_inside%}{% endblock %}
+			</header>
+
+			{% block post %}
+			{% endblock %}
+			
+		
+		</section>
+	</div><!--/main_container-->
+
+</body>
+</html>
