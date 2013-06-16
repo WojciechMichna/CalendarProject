@@ -322,12 +322,23 @@ class CallendarController extends Controller
 			  $sql="create user '".$user->getUsername()."'@'%' identified by '". $password_temp."';";
 			  $em->getConnection()->executeUpdate($sql);
 	
-$sql="CREATE VIEW symfony.".$user->getUsername()."_view AS SELECT date,event FROM symfony.Dates where user='".$user->getUsername()."' and user_id=".$user->getID().";";
+			  $sql= "CREATE VIEW symfony.".
+				$user->getUsername().
+				"_view AS SELECT date,event FROM symfony.Dates where user='".
+				$user->getUsername().
+				"' and user_id=".
+				$user->getID().";";
+			  
+			  
 			  $em->getConnection()->executeUpdate($sql);
 
 			  
-$sql="GRANT SELECT ON symfony.".$user->getUsername()."_view  TO '".$user->getUsername()."'@'%'";			  
-			   $em->getConnection()->executeUpdate($sql);
+			  $sql=	"GRANT SELECT ON symfony.".
+				$user->getUsername().
+				"_view  TO '".
+				$user->getUsername()."'@'%'";			  
+			   
+			  $em->getConnection()->executeUpdate($sql);
 			
 			
 			  	return $this->redirect($this->generateUrl('user_get'));
