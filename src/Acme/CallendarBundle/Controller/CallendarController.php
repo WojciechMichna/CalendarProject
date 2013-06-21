@@ -15,16 +15,42 @@ use Acme\CallendarBundle\Entity\Dates;
 //Native Mapping
 use Doctrine\ORM\Query\ResultSetMapping;
 
-
+/**
+ * @brief Main controller for Calendar
+ *
+ * Contains: 
+ * simple api for conecting with libcurl aplication
+ * user managment, creating homeAction for each logged user 
+ * simple function for creating view for new users
+ * dates and event menagment
+ * 
+ */
+ 
 class CallendarController extends Controller
 {
+
+
+/**
+ * @brief function that just show curently logged user
+ */
 	public function homeAction()
 	{		$user = $this->get('security.context')->getToken()->getUser();
 			$string = $user->getUsername();
 		return $this->render('AcmeCallendarBundle:Default:user.html.twig',array('name' => $string));
 	}
 	
-
+/**
+ * @brief function providing way to connect with calendar aplication
+ * function providing way to connect with calendar aplication
+ *	aplication is using following adress
+ *	/libapi/home/{bs_username} where bs_username is username encoded with base 64 
+ * 	by post our aplication send information about dates and events
+ * 	before writing this information to database it check:
+ *	is user in post and in {bs_username} the same user?
+ *	user exist ?
+ *	can he login?
+ */
+	
 	public function libapiAction(Request $request,$bs_username)
 	{
 	   
@@ -125,7 +151,13 @@ class CallendarController extends Controller
 
 	
 	}
+
 	
+/**
+ * @brief old and useless function 
+ *	this is old api function the problem is that it get informations from get with was dangerous
+ *	
+ */	
 	public function apiAction($name,$password,$event)
 	{	
 	
@@ -173,6 +205,13 @@ class CallendarController extends Controller
 	
 	}
 
+	
+/**
+ * @brief dunction deleting existing events from database  
+ *	function deletes event from database if user is logged 
+ *	
+ */	
+	
 	public function DelEventAction($date)
 	{		    
 	  	if ($this->get('security.context')->isGranted('ROLE_USER')) {		
@@ -201,7 +240,12 @@ class CallendarController extends Controller
 	  
 	}	
 	
-	
+
+/**
+ * @brief function generating user "home"  
+ *	it generally generates welcome page with callendar filled up with events 
+ *	
+ */	
 	public function DatesAction()
 	{
 
@@ -239,6 +283,12 @@ class CallendarController extends Controller
 	     return new Response('<html><body>Please Login</body></html>');
 	 }
 	 
+/**
+ * @brief function creating events   
+ *	fucntion check if user have privilages and then create new event
+ *	if event exist in our calendar it will be overwriten
+ */	
+	
 	
 	public function NewEventAction(Request $request)
 	{
@@ -290,7 +340,14 @@ class CallendarController extends Controller
 	
 			    
 	
-	
+/**
+ * @brief function create user for symfony aplication and for database
+ *	after reassuring that user is admin function create user for symfony aplication 
+ *	and for database. After creating user it gives him role and create view on database with events and dates.
+ *	user will have acces ony to his view (he will be granted only select on it). the view is created 
+ *	after succesfuly crating user
+ *	
+ */		
 	
 	public function adduserAction(Request $request)
 	{
@@ -352,7 +409,10 @@ class CallendarController extends Controller
 	
 		}
 	}
-
+/**
+ * @brief function generates list of active users (only avalible in /admin/)
+ *	
+ */
 	public function getuserAction()
 	{
 		if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
@@ -362,7 +422,10 @@ class CallendarController extends Controller
 		}	
 	}
 
-
+/**
+ * @brief function deletes user and his view in database
+ *	
+ */
 	public function userdelAction($Id)
 	{
 		if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {			
